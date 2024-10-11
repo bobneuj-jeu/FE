@@ -2,7 +2,9 @@ import styled from "styled-components";
 
 export default function OrangeBtn({text, onClick}) {
     return (
-        <Btn onClick={onClick}>{text}</Btn>
+        <div>
+            <Btn onClick={onClick}>{text}</Btn>
+        </div>
     )
 }
 
