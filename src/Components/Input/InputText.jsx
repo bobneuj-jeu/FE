@@ -9,7 +9,7 @@ export default function InputText({ placeholder }) {
 }
 
 const Input = styled.input`
-    width: 100vw;
+    width: 100%;
     height: 60px;
     padding: 17px 30px;
     border-radius: 10px;
