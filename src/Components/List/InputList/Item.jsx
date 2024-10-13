@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export default function InputList({name, onClick}){
+export default function Item({name, onClick}){
     return(
         <WrapBox>
             <Name>{name}</Name>
