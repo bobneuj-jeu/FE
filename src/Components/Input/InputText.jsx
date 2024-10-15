@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
-export default function InputText({ placeholder , type}) {
+export default function InputText({ placeholder , type, isRequired }) {
     return(
         <div>
+            {isRequired ? <SmallText>*필수</SmallText> : null}
             <Input placeholder={placeholder} type={type}/>
         </div>
     );
@@ -20,4 +21,10 @@ const Input = styled.input`
     &::placeholder {
         color: #B9B7B7;
     }
+`
+
+const SmallText = styled.div`
+    font-size: 10px;
+    color: #FF8024;
+    margin-left: 6px;
 `
