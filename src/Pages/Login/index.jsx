@@ -8,15 +8,17 @@ export default function Login() {
         <Container>
             <Content>
                 <InputBox>
-                    <InputText placeholder={"아이디를 입력해주세요"}/>
-                    <InputText placeholder={"비밀번호를 입력해주세요"}/>
+                    <InputText placeholder={"아이디를 입력해주세요"} type={"text"}/>
+                    <InputText placeholder={"비밀번호를 입력해주세요"} type={"password"}/>
                     <SmallTextBox><SmallText to={"/"}>아이디 혹은 비밀번호를 잊으셨나요?</SmallText></SmallTextBox>
                 </InputBox>
                 <BtnBox>
+                    <TextBox>계정이 없으신가요? <JoinText to={"/"}>회원가입 하러가기</JoinText></TextBox>
                     <OrangeBtn text={"완료"}/>
                 </BtnBox>
             </Content>
         </Container>
+
     )
 }
 
@@ -29,13 +31,13 @@ const Container = styled.div`
 `
 
 const Content = styled.div`
-    padding: 70px 0px;
+    padding-top: 15%;
     height: 100%;
     max-width: 1000px;
     width: 85%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
 `
 
 const InputBox = styled.div`
@@ -55,6 +57,18 @@ const SmallText = styled(Link)`
 `
 
 const BtnBox = styled.div`
-    margin-top: auto;
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+`
+
+const TextBox = styled.div`
+    color: #C1C1C1;
+    text-align: center;
+    font-size: 15px;
+    letter-spacing: -0.33px;
+`
+
+const JoinText = styled(Link)`
+    color: #FF8024;
 `

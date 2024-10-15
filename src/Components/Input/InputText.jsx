@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-export default function InputText({ placeholder }) {
+export default function InputText({ placeholder , type}) {
     return(
         <div>
-            <Input placeholder={placeholder}/>
+            <Input placeholder={placeholder} type={type}/>
         </div>
     );
 }

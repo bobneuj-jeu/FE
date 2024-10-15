@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 export default function OrangeBtn({text, onClick}) {
     return (
-        <div>
+        <BtnBox>
             <Btn onClick={onClick}>{text}</Btn>
-        </div>
+        </BtnBox>
     )
 }
 
@@ -17,4 +17,8 @@ const Btn = styled.button`
     border-radius: 10px;
     font-size: 20px;
     cursor: pointer;
+`
+
+const BtnBox = styled.div`
+    margin-bottom: 7vh;
 `
