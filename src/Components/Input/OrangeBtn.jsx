@@ -20,5 +20,6 @@ const Btn = styled.button`
 `
 
 const BtnBox = styled.div`
+    margin-top: 10px;
     margin-bottom: 7vh;
 `

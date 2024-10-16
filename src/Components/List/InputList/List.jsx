@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Item from "./Item";
 
-export default function ({list}){
+export default function List({list}){
     return (
         <Wrap>
             <Ul>
@@ -12,7 +12,6 @@ export default function ({list}){
 }
 
 const Wrap = styled.div`
-    flex-grow: 1;
     overflow-y: scroll;
 `
 
@@ -20,4 +19,5 @@ const Ul = styled.ul`
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
+    height: 100%;
 `
