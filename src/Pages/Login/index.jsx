@@ -2,10 +2,12 @@ import styled from "styled-components";
 import InputText from "../../Components/Input/InputText";
 import {Link} from "react-router-dom";
 import OrangeBtn from "../../Components/Input/OrangeBtn";
+import LogoBar from "../../Components/Bar/LogoBar";
 
 export default function Login() {
     return (
         <Container>
+            <LogoBar/>
             <Content>
                 <InputBox>
                     <InputText placeholder={"아이디를 입력해주세요"} type={"text"}/>
@@ -18,15 +20,15 @@ export default function Login() {
                 </BtnBox>
             </Content>
         </Container>
-
     )
 }
 
 const Container = styled.div`
     width: 100vw;
-    flex-grow: 1;
+    height: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     position: relative;
 `
 
