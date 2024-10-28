@@ -15,7 +15,7 @@ export default function Login() {
                     <SmallTextBox><SmallText to={"/"}>아이디 혹은 비밀번호를 잊으셨나요?</SmallText></SmallTextBox>
                 </InputBox>
                 <BtnBox>
-                    <TextBox>계정이 없으신가요? <JoinText to={"/"}>회원가입 하러가기</JoinText></TextBox>
+                    <TextBox>계정이 없으신가요? <JoinText to={"/signup"}>회원가입 하러가기</JoinText></TextBox>
                     <OrangeBtn text={"완료"}/>
                 </BtnBox>
             </Content>
