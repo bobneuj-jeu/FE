@@ -10,11 +10,16 @@ export default function Allergy() {
     const handleAddButtonClick = (item) => {
         setAllergy((current) => [...current, item]);
     }
+
+    const handleDelButtonClick = (itemToDelete) => {
+        setAllergy((current) => current.filter(item => item !== itemToDelete));
+    }
+
     return (
         <S.Wrap>
             <S.TextBox>어떤 알러지가 있으신가요?</S.TextBox>
             <InputText placeholder={"알러지를 입력해주세요"} type={"text"} useBtn={true} onClick={handleAddButtonClick}/>
-            <List list={Allergy}/>
+            <List list={Allergy} onClick={handleDelButtonClick}/>
         </S.Wrap>
     );
 }

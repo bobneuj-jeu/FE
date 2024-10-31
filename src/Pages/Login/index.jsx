@@ -9,7 +9,7 @@ export default function Login({ setIsLogin }) {
 
     const handleLogin = () => {
         setIsLogin(true);
-        localStorage.setItem('isLogin', 'true'); // 로그인 시 상태 저장
+        localStorage.setItem('isLogin', 'true');
         navigate("/home");
     };
 

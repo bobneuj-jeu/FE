@@ -12,14 +12,13 @@ import styled from "styled-components";
 
 function App() {
     const [isLogin, setIsLogin] = useState(() => {
-        // 로컬 스토리지에서 로그인 정보 불러오기
         const savedLoginStatus = localStorage.getItem('isLogin');
         return savedLoginStatus === 'true';
     });
 
     const handleLogin = (status) => {
         setIsLogin(status);
-        localStorage.setItem('isLogin', status); // 로그인 상태 저장
+        localStorage.setItem('isLogin', status);
     };
 
     return (
@@ -33,7 +32,7 @@ function App() {
                 <Route path="/login" element={<Login setIsLogin={handleLogin} />} />
                 <Route path="/signup" element={<Signup />} />
             </Routes>
-            {isLogin && <NavBar />} {/* isLogin 상태에 따라 NavBar 표시 */}
+            {isLogin && <NavBar />}
         </Container>
     );
 }
