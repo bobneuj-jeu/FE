@@ -1,22 +1,32 @@
 import styled from "styled-components";
 import InputText from "../../Components/Input/InputText";
-import {Link} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import OrangeBtn from "../../Components/Input/OrangeBtn";
 import LogoBar from "../../Components/Bar/LogoBar";
 
-export default function Login() {
+export default function Login({ setIsLogin }) {
+    const navigate = useNavigate();
+
+    const handleLogin = () => {
+        setIsLogin(true);
+        localStorage.setItem('isLogin', 'true'); // 로그인 시 상태 저장
+        navigate("/home");
+    };
+
     return (
         <Container>
-            <LogoBar/>
+            <LogoBar />
             <Content>
                 <InputBox>
-                    <InputText placeholder={"아이디를 입력해주세요"} type={"text"}/>
-                    <InputText placeholder={"비밀번호를 입력해주세요"} type={"password"}/>
-                    <SmallTextBox><SmallText to={"/"}>아이디 혹은 비밀번호를 잊으셨나요?</SmallText></SmallTextBox>
+                    <InputText placeholder={"아이디를 입력해주세요"} type={"text"} />
+                    <InputText placeholder={"비밀번호를 입력해주세요"} type={"password"} />
+                    <SmallTextBox>
+                        <SmallText to={"/"}>아이디 혹은 비밀번호를 잊으셨나요?</SmallText>
+                    </SmallTextBox>
                 </InputBox>
                 <BtnBox>
                     <TextBox>계정이 없으신가요? <JoinText to={"/signup"}>회원가입 하러가기</JoinText></TextBox>
-                    <OrangeBtn text={"완료"}/>
+                    <OrangeBtn text={"완료"} onClick={handleLogin} />
                 </BtnBox>
             </Content>
         </Container>

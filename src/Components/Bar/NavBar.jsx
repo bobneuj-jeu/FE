@@ -65,6 +65,9 @@ const WrapNav = styled.ul`
     display: flex;
     align-items: center;
     justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    background: white;
 `
 const NavItem = styled.li`
     display: inline-block;

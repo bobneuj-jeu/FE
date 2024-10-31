@@ -2,12 +2,13 @@ import styled from "styled-components";
 import LogoBar from "../../Components/Bar/LogoBar";
 import {useState} from "react";
 import LunchBox from "../../Assets/Icons/LunchBox.svg";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Bad from "../../Assets/Icons/bad.svg"
 import Good from "../../Assets/Icons/good.svg"
 import Soso from "../../Assets/Icons/soso.svg"
 
 export default function Home() {
+    const navigate = useNavigate();
     const [Menus, setMenus] = useState([]);
     const [rate, setRate] = useState({rate: 0, state: Bad, color: "#C62828", text: "노력이 필요해요"});
     return (
@@ -30,7 +31,7 @@ export default function Home() {
                     </Menu>
                 </MenuWrapper>
                 <BtnContents>
-                    <BigBtn>
+                    <BigBtn to={"./makeMenu"}>
                         <img src={LunchBox} alt={"사진"}/>
                         <BtnText>식단 짜기</BtnText>
                     </BigBtn>

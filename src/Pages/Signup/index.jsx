@@ -6,8 +6,10 @@ import Allergy from "./Allergy";
 import Diabetes from "./Diabetes";
 import OtherInfo from "./OtherInfo";
 import LogoBar from "../../Components/Bar/LogoBar";
+import {useNavigate} from "react-router-dom";
 
 export default function Signup() {
+    const navigate = useNavigate();
     const pageList = [
         <Join/>,
         <Allergy/>,
@@ -16,7 +18,9 @@ export default function Signup() {
     ]
     const [page, setPage] = useState(0);
     const onClickHandler = () => {
-        if (page>=pageList.length-1) {}
+        if (page>=pageList.length-1) {
+            navigate("/login");
+        }
         else {
             setPage((current) => current + 1);
         }

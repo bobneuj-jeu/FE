@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import Item from "./Item";
 
-export default function List({list}){
+export default function List({list, onClick}){
     return (
         <Wrap>
             <Ul>
-                {list.map((item, index) => (<Item key={index} name={item} />))}
+                {list.map((item, index) => (<Item key={index} name={item} onClick={onClick}/>))}
             </Ul>
         </Wrap>
     );

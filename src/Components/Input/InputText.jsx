@@ -1,12 +1,28 @@
 import styled from "styled-components";
+import {useState} from "react";
 
-export default function InputText({ placeholder , type, isRequired, useBtn, onChange, value }) {
-    return(
+export default function InputText({ placeholder, type, isRequired, useBtn, onClick }) {
+    const [InputValue, setInputValue] = useState("")
+    const onChangeHandler = (e) => {
+        setInputValue(e.target.value);
+    }
+    return (
+
         <div>
             {isRequired ? <SmallText>*필수</SmallText> : null}
             <InputBox>
-                <Input placeholder={placeholder} type={type} onChange={onChange} value={value} />
-                {useBtn ? <AddBtn>추가</AddBtn>: null}
+                <Input placeholder={placeholder} type={type} onChange={onChangeHandler} value={InputValue} />
+                {useBtn ? (
+                    <AddBtn
+                        onClick={(event) => {
+                            event.preventDefault();
+                            onClick(InputValue);
+                            setInputValue("");
+                        }}
+                    >
+                        추가
+                    </AddBtn>
+                ) : null}
             </InputBox>
         </div>
     );
@@ -22,7 +38,7 @@ const InputBox = styled.div`
     padding-left: 30px;
     padding-right: 15px;
     gap: 10px;
-`
+`;
 
 const Input = styled.input`
     background: none;
@@ -32,7 +48,7 @@ const Input = styled.input`
     &::placeholder {
         color: #B9B7B7;
     }
-`
+`;
 
 const AddBtn = styled.button`
     cursor: pointer;
@@ -45,10 +61,10 @@ const AddBtn = styled.button`
     align-items: center;
     border-radius: 10px;
     font-weight: 700;
-`
+`;
 
 const SmallText = styled.div`
     font-size: 10px;
     color: #FF8024;
     margin-left: 6px;
-`
+`;
