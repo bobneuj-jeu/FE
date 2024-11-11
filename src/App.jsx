@@ -12,14 +12,8 @@ import styled from "styled-components";
 
 function App() {
     const [isLogin, setIsLogin] = useState(() => {
-        const savedLoginStatus = localStorage.getItem('isLogin');
-        return savedLoginStatus === 'true';
+        return localStorage.getItem('userId') != null;
     });
-
-    const handleLogin = (status) => {
-        setIsLogin(status);
-        localStorage.setItem('isLogin', status);
-    };
 
     return (
         <Container className={"App"}>
@@ -29,7 +23,7 @@ function App() {
                 <Route path="/menu" element={<Menu />} />
                 <Route path="/fridge" element={<Fridge />} />
                 <Route path="/user" element={<User />} />
-                <Route path="/login" element={<Login setIsLogin={handleLogin} />} />
+                <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
             </Routes>
             {isLogin && <NavBar />}

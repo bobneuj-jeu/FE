@@ -1,25 +1,14 @@
 import styled from "styled-components";
-import {useState} from "react";
 
-export default function InputText({ placeholder, type, isRequired, useBtn, onClick }) {
-    const [InputValue, setInputValue] = useState("")
-    const onChangeHandler = (e) => {
-        setInputValue(e.target.value);
-    }
+export default function InputText({ placeholder, type, isRequired, useBtn, onClick, onChange, value }) {
     return (
 
         <div>
             {isRequired ? <SmallText>*필수</SmallText> : null}
             <InputBox>
-                <Input placeholder={placeholder} type={type} onChange={onChangeHandler} value={InputValue} />
+                <Input placeholder={placeholder} type={type} onChange={onChange} value={value} />
                 {useBtn ? (
-                    <AddBtn
-                        onClick={(event) => {
-                            event.preventDefault();
-                            onClick(InputValue);
-                            setInputValue("");
-                        }}
-                    >
+                    <AddBtn onClick={onClick}>
                         추가
                     </AddBtn>
                 ) : null}

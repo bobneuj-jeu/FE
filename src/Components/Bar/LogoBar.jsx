@@ -10,7 +10,7 @@ export default function LogoBar() {
 }
 
 const Container = styled.div`
-    height: 20vh;
+    height: 170px;
     display: flex;
     justify-content: center;
     align-items: end;
