@@ -3,7 +3,7 @@ import styled from "styled-components";
 export default function Radio({text, id, name, checked}) {
     return (
         <div>
-            <RealRadio type={"radio"} id={id} name={name} Checked={checked}/>
+            <RealRadio type={"radio"} id={id} name={name} defaultChecked={checked} value={id} />
             <CustomRadio htmlFor={id}>{text}</CustomRadio>
         </div>
     );

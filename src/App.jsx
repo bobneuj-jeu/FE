@@ -18,8 +18,8 @@ function App() {
     return (
         <Container className={"App"}>
             <Routes>
-                <Route path="/home" element={<Home />} />
-                <Route path="/home/makeMenu" element={<MakeMenu />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/makeMenu" element={<MakeMenu />} />
                 <Route path="/menu" element={<Menu />} />
                 <Route path="/fridge" element={<Fridge />} />
                 <Route path="/user" element={<User />} />

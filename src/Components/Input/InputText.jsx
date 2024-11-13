@@ -8,7 +8,10 @@ export default function InputText({ placeholder, type, isRequired, useBtn, onCli
             <InputBox>
                 <Input placeholder={placeholder} type={type} onChange={onChange} value={value} />
                 {useBtn ? (
-                    <AddBtn onClick={onClick}>
+                    <AddBtn onClick={(e)=>{
+                        e.preventDefault();
+                        onClick();
+                    }}>
                         추가
                     </AddBtn>
                 ) : null}
