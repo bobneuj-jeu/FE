@@ -12,22 +12,25 @@ export default function Login() {
 
     const Login = async () => {
         try{
-            const response = await fetch('', {
+            const response = await fetch('/user/login', {
                 method: 'POST',
                 headers: {
-                    'Content-Type':'application/json'
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    "username": id,
+                    "userid": id,
                     "password": pwd,
                 })
             })
 
-            if(response.ok){
-                const data = await response.json();
-                localStorage.setItem({'userId' : id});
-                navigate('/home');
-            }
+            localStorage.setItem('isLogin', "true");
+            localStorage.setItem('userId', id);
+            navigate('/');
+            // if(response.ok){
+            //     localStorage.setItem('isLogin', "true");
+            //     localStorage.setItem('userId', id);
+            //     navigate('/');
+            // }
         } catch (error) {
             console.log(error);
         }

@@ -14,28 +14,37 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 
 const icons = {
-    home,
-    menu,
-    calender,
-    fridge,
-    user,
+    home: '/',
+    menu: '/menu',
+    calender: '/calender',
+    fridge : '/fridge',
+    user : '/user',
 };
 
+const iconsDefault = {
+    home: home,
+    menu: menu,
+    calender: calender,
+    fridge: fridge,
+    user: user,
+};
+
+
 const iconsActive = {
-    "home" : homeOrange,
-    "menu" : menuOrange,
-    "calender" : calenderOrange,
-    "fridge" : fridgeOrange,
-    "user" : userOrange,
+    home : homeOrange,
+    menu : menuOrange,
+    calender : calenderOrange,
+    fridge : fridgeOrange,
+    user : userOrange,
 };
 
 function NavBtn({name}){
     return(
         <NavItem>
-            <NavLink to={`/${name}`}>
+            <NavLink to={icons[name]}>
                 {({ isActive }) => (
                     <img
-                        src={isActive ? iconsActive[name] : icons[name]}
+                        src={isActive ? iconsActive[name] : iconsDefault[name]}
                         alt={name}
                     />
                 )}

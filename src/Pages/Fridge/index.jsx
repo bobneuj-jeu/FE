@@ -1,33 +1,98 @@
 import InputText from "../../Components/Input/InputText";
 import List from "../../Components/List/InputList/List";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import styled from "styled-components";
 import TopBar from "../../Components/Bar/TopBar";
-import { useNavigate } from "react-router-dom"; // useNavigate import
+import { useNavigate } from "react-router-dom";
 
 export default function Fridge() {
     const [Fridge, setFridge] = useState([]);
+    const [input, setInput] = useState("");
     const navigate = useNavigate();
+    const id = localStorage.getItem('userid');
 
-    const handleBackButtonClick = () => {
-        navigate(-1);
-    };
+    const addFridge = async (item) => {
+        try {
+            const response = await fetch('/fridge/add',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    userId: id,
+                    itemname: item
+                })
+            })
+            if(response.ok){
+                setFridge((current) => [...current, item]);
+            }
+        } catch (err){
+            console.log(err)
+        }
+    }
 
-    const handleAddButtonClick = (item) => {
-        setFridge((current) => [...current, item]);
+    const delFridge = async (item) => {
+        try {
+            const response = await fetch(`/fridge/delete/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    itemname: item
+                })
+
+
+            })
+            if(response.ok){
+                const data = await response.json();
+                setFridge((current) => current.filter(listItem => listItem !== item));
+            }
+        } catch (err){
+            console.log(err)
+        }
+    }
+
+    const handleAddButtonClick = () => {
+        if(Fridge.includes(input)){
+            alert("이미 존재하는 식재료입니다.");
+        } else {
+            addFridge(input);
+        }
+        setInput("");
     }
 
     const handleDelButtonClick = (itemToDelete) => {
-        setFridge((current) => current.filter(item => item !== itemToDelete));
+        delFridge(itemToDelete);
     }
+
+    const getFridges = async () => {
+        try{
+            const response = await fetch('', {
+                method: 'POST',
+            })
+
+            if(response.ok){
+                const data = await response.json();
+                setFridge(data);
+                console.log("냉장고 조회 성공")
+            }
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+    useEffect(() => {
+        getFridges();
+    }, [])
 
     return (
         <Wrap>
             <TopBar/>
-            <BackButton onClick={handleBackButtonClick}>←</BackButton>
+            <BackButton onClick={()=>navigate(-1)}>←</BackButton>
             <Form>
                 <TextBox>가지고 있는 식재료를 입력해주세요</TextBox>
-                <InputText placeholder={"식재료를 입력해주세요"} type={"text"} useBtn={true} onClick={handleAddButtonClick}/>
+                <InputText onChange={(e)=>setInput(e.target.value)} value={input} placeholder={"식재료를 입력해주세요"} type={"text"} useBtn={true} onClick={handleAddButtonClick}/>
                 <List list={Fridge} onClick={handleDelButtonClick}/>
             </Form>
         </Wrap>

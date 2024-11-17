@@ -1,4 +1,3 @@
-import './style.css'
 import styled from 'styled-components';
 import LogoImg from '../../Assets/Logos/logo-white.svg';
 
@@ -16,6 +15,7 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    background: #FF8024;
 `;
 
 const Logo = styled.img`
