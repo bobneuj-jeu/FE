@@ -9,6 +9,7 @@ export default function Fridge() {
     const [Fridge, setFridge] = useState([]);
     const [input, setInput] = useState("");
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
     const id = localStorage.getItem('userid');
 
     const addFridge = async (item) => {
@@ -79,6 +80,8 @@ export default function Fridge() {
             }
         }catch(err){
             console.log(err)
+        } finally{
+            setLoading(false);
         }
     }
 
@@ -87,15 +90,19 @@ export default function Fridge() {
     }, [])
 
     return (
-        <Wrap>
-            <TopBar/>
-            <BackButton onClick={()=>navigate(-1)}>←</BackButton>
-            <Form>
-                <TextBox>가지고 있는 식재료를 입력해주세요</TextBox>
-                <InputText onChange={(e)=>setInput(e.target.value)} value={input} placeholder={"식재료를 입력해주세요"} type={"text"} useBtn={true} onClick={handleAddButtonClick}/>
-                <List list={Fridge} onClick={handleDelButtonClick}/>
-            </Form>
-        </Wrap>
+        <>
+            {loading ? (<></>):
+                <Wrap>
+                    <TopBar/>
+                    <BackButton onClick={()=>navigate(-1)}>←</BackButton>
+                    <Form>
+                        <TextBox>가지고 있는 식재료를 입력해주세요</TextBox>
+                        <InputText onChange={(e)=>setInput(e.target.value)} value={input} placeholder={"식재료를 입력해주세요"} type={"text"} useBtn={true} onClick={handleAddButtonClick}/>
+                        <List list={Fridge} onClick={handleDelButtonClick}/>
+                    </Form>
+                </Wrap>
+            }
+        </>
     );
 }
 

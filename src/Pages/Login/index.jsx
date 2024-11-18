@@ -9,8 +9,9 @@ export default function Login() {
     const navigate = useNavigate();
     const [id, setId] = useState("");
     const [pwd, setPwd] = useState("");
+    const [loading, setLoading] = useState(false);
 
-    const Login = async () => {
+    const handleLogin = async () => {
         try{
             const response = await fetch('/user/login', {
                 method: 'POST',
@@ -33,31 +34,37 @@ export default function Login() {
             // }
         } catch (error) {
             console.log(error);
+        } finally {
+            setLoading(false);
         }
     }
 
     const onClickHandler = () => {
-        Login();
-        navigate("/home");
+        setLoading(true);
+        handleLogin();
     };
 
     return (
-        <Container>
-            <LogoBar />
-            <Content>
-                <InputBox>
-                    <InputText onChange={(e)=>setId(e.target.value)} value={id} placeholder={"아이디를 입력해주세요"} type={"text"} />
-                    <InputText onChange={(e)=>setPwd(e.target.value)} value={pwd} placeholder={"비밀번호를 입력해주세요"} type={"password"} />
-                    <SmallTextBox>
-                        <SmallText to={"/"}>아이디 혹은 비밀번호를 잊으셨나요?</SmallText>
-                    </SmallTextBox>
-                </InputBox>
-                <BtnBox>
-                    <TextBox>계정이 없으신가요? <JoinText to={"/signup"}>회원가입 하러가기</JoinText></TextBox>
-                    <OrangeBtn text={"완료"} onClick={onClickHandler} />
-                </BtnBox>
-            </Content>
-        </Container>
+        <>
+            {loading? <></>:
+                <Container>
+                    <LogoBar />
+                    <Content>
+                        <InputBox>
+                            <InputText onChange={(e)=>setId(e.target.value)} value={id} placeholder={"아이디를 입력해주세요"} type={"text"} />
+                            <InputText onChange={(e)=>setPwd(e.target.value)} value={pwd} placeholder={"비밀번호를 입력해주세요"} type={"password"} />
+                            <SmallTextBox>
+                                <SmallText to={"/"}>아이디 혹은 비밀번호를 잊으셨나요?</SmallText>
+                            </SmallTextBox>
+                        </InputBox>
+                        <BtnBox>
+                            <TextBox>계정이 없으신가요? <JoinText to={"/signup"}>회원가입 하러가기</JoinText></TextBox>
+                            <OrangeBtn text={"완료"} onClick={onClickHandler} />
+                        </BtnBox>
+                    </Content>
+                </Container>
+            }
+            </>
     )
 }
 
