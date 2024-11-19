@@ -7,12 +7,35 @@ import DayRadio from "./Radio";
 function MenuBox({data}) {
     const [isModify, setIsModify] = useState(false);
     const [input, setInput] = useState(data["food_item_ids"].join("\n"));
+
     const textarea = useRef();
+    const username = localStorage.getItem("userId");
 
     const handleResizeHeight = () => {
         textarea.current.style.height = 'auto'; //height 초기화
         textarea.current.style.height = textarea.current.scrollHeight + 'px';
     };
+
+    const updateMenu = async () => {
+        try {
+            const response = await fetch("/meals/update", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    "username" : username,
+                    "meal-date" : data["meal-date"],
+                    "meal-time": data["meal-time"],
+                    "updateMealArray" : input.split('\n')
+                })
+            })
+        } catch (err) {
+
+        } finally {
+            setIsModify((current) => !current)
+        }
+    }
 
     const onChange = (e) => {
         setInput(e.target.value);
@@ -25,7 +48,7 @@ function MenuBox({data}) {
 
     return(
         <MenuWrap>
-            <MenuModify onClick={()=>setIsModify((current) => !current)}>
+            <MenuModify onClick={()=>updateMenu()}>
                 <img src={Pen} alt="" />
                 <div>수정하기</div>
             </MenuModify>
@@ -175,6 +198,6 @@ const MenusContent = styled.div`
     flex-direction: column;
     gap: 15px;
     width: 75%;
-    max-height: 60%;
+    max-height: 65%;
     overflow-y: scroll;
 `

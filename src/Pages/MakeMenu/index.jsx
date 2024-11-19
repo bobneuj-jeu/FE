@@ -3,7 +3,7 @@ import LogoBar from "../../Components/Bar/LogoBar";
 import ExcludeDate from "./ExcludeDate";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Loading from "../../Assets/Loding.png";
+import Loading from "../../Assets/Loding.svg";
 
 export default function MakeMenu() {
     const navigate = useNavigate();
@@ -16,8 +16,8 @@ export default function MakeMenu() {
 
     const handleButtonClick = (buttonIndex) => {
         if (buttonIndex === 3) {
-            setActiveBtn([]); // 모든 버튼의 활성화 상태를 초기화
-            localStorage.removeItem('activeButtons'); // 로컬 스토리지에서 초기화
+            setActiveBtn([]);
+            localStorage.removeItem('activeButtons');
             navigate("/menu");
         } else {
             setActiveBtn((current) => {
@@ -40,7 +40,7 @@ export default function MakeMenu() {
     };
 
     useEffect(() => {
-        console.log("Active Buttons:", activeBtn); // activeBtn의 상태 확인
+        console.log("Active Buttons:", activeBtn);
     }, [activeBtn]);
 
     const pageList = [

@@ -13,25 +13,22 @@ export default function Login() {
 
     const handleLogin = async () => {
         try{
-            const response = await fetch('/user/login', {
+            const response = await fetch('http://10.150.149.107:3000/user/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    "userid": id,
+                    "username": id,
                     "password": pwd,
                 })
             })
 
-            localStorage.setItem('isLogin', "true");
-            localStorage.setItem('userId', id);
-            navigate('/');
-            // if(response.ok){
-            //     localStorage.setItem('isLogin', "true");
-            //     localStorage.setItem('userId', id);
-            //     navigate('/');
-            // }
+            if(response.ok){
+                localStorage.setItem('isLogin', "true");
+                localStorage.setItem('userId', id);
+                navigate('/');
+            }
         } catch (error) {
             console.log(error);
         } finally {

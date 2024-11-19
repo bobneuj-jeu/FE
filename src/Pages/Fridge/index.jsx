@@ -10,17 +10,16 @@ export default function Fridge() {
     const [input, setInput] = useState("");
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
-    const id = localStorage.getItem('userid');
+    const id = localStorage.getItem('userId');
 
     const addFridge = async (item) => {
         try {
-            const response = await fetch('/fridge/add',{
+            const response = await fetch(`http://10.150.149.107:3000/fridge/add/${id}`,{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    userId: id,
                     itemname: item
                 })
             })
@@ -34,13 +33,13 @@ export default function Fridge() {
 
     const delFridge = async (item) => {
         try {
-            const response = await fetch(`/fridge/delete/${id}`, {
+            const response = await fetch(`http://10.150.149.107:3000/fridge/delete/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    itemname: item
+                    "itemname": item
                 })
 
 
@@ -55,8 +54,10 @@ export default function Fridge() {
     }
 
     const handleAddButtonClick = () => {
-        if(Fridge.includes(input)){
+        if(Fridge.includes(input.trim())){
             alert("이미 존재하는 식재료입니다.");
+        } else if(input.trim()===""){
+            alert("추가할 식재료를 입력해주세요");
         } else {
             addFridge(input);
         }
@@ -69,13 +70,14 @@ export default function Fridge() {
 
     const getFridges = async () => {
         try{
-            const response = await fetch('', {
-                method: 'POST',
+            const response = await fetch(`http://10.150.149.107:3000/fridge/${id}`, {
+                method: 'GET',
             })
 
             if(response.ok){
                 const data = await response.json();
-                setFridge(data);
+                console.log(data)
+                setFridge(data["items"]);
                 console.log("냉장고 조회 성공")
             }
         }catch(err){
