@@ -1,16 +1,23 @@
 import styled from "styled-components";
+import {useState} from "react";
 
 
-
-function CheckBox({id, name, time}){
-    return(
+function CheckBox({ id, name, time, checked, onChange }) {
+    return (
         <CheckWrapper>
             <CheckText>{time}</CheckText>
-            <RealCheckBox type={"checkbox"} id={id} name={name} />
+            <RealCheckBox
+                type={"checkbox"}
+                id={id}
+                name={name}
+                checked={checked}
+                onChange={onChange}
+            />
             <CustomCheckBox htmlFor={id}></CustomCheckBox>
         </CheckWrapper>
     );
 }
+
 const CheckWrapper = styled.div`
     width: 90%;
     height: 50px; /* 크기 고정 */
@@ -44,18 +51,36 @@ const CustomCheckBox = styled.label`
 `
 
 
-function CheckBoxContent({day}){
-    return(
+function CheckBoxContent({ day, daysChecked, setDaysChecked }) {
+    const handleCheckboxChange = (id, time) => {
+        const item = `${day}-${time}`;
+        setDaysChecked((prev) =>
+            prev.includes(item) ? prev.filter((v) => v !== item) : [...prev, item]
+        );
+    };
+
+    return (
         <DayWrap>
             <DayContent>{day}</DayContent>
             <TimeContent>
-                <CheckBox name={"11111"} id={day+"1"} time={"아침"}/>
-                <CheckBox name={"11111"} id={day+"2"} time={"점심"}/>
-                <CheckBox name={"11111"} id={day+"1"} time={"저녁"}/>
+                {["아침", "점심", "저녁"].map((time, index) => {
+                    const id = `${day}${index}`;
+                    return (
+                        <CheckBox
+                            key={id}
+                            id={id}
+                            name="time"
+                            time={time}
+                            checked={daysChecked.includes(`${day}-${time}`)}
+                            onChange={() => handleCheckboxChange(id, time)}
+                        />
+                    );
+                })}
             </TimeContent>
         </DayWrap>
     );
 }
+
 
 const DayWrap = styled.div`
     width: 100%;
@@ -89,17 +114,26 @@ const TimeContent = styled.div`
 const days = ["월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"];
 
 export default function ExcludeDate() {
+    const [daysChecked, setDaysChecked] = useState([]);
+    console.log(daysChecked);
+
     return (
         <Wrapper>
             <ExcludeTitle>제외할 요일</ExcludeTitle>
             <DaysList>
                 {days.map((day) => (
-                    <CheckBoxContent day={day} key={day}/>
+                    <CheckBoxContent
+                        day={day}
+                        key={day}
+                        daysChecked={daysChecked}
+                        setDaysChecked={setDaysChecked}
+                    />
                 ))}
             </DaysList>
         </Wrapper>
     );
 }
+
 const ExcludeTitle = styled.div`
     color: #FF8024;
     font-size: 15px;

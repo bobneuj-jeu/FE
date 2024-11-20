@@ -3,7 +3,7 @@ import LogoBar from "../../Components/Bar/LogoBar";
 import ExcludeDate from "./ExcludeDate";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Loading from "../../Assets/Loding.svg";
+import Loading from "/Users/sunz8281/Desktop/밥뭇나/src/Assets/Loading.svg";
 
 export default function MakeMenu() {
     const navigate = useNavigate();
